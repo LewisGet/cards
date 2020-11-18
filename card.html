@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="row justify-content-between">
                         <h1 class="card-title col-8">title</h1>
-                        <span class="card-type badge badge-secondary col-2">type</span>
+                        <span class="card-type badge badge-secondary col-4">type</span>
                     </div>
                     <p class="card-text">content</p>
                 </div>
@@ -47,7 +47,7 @@
             row.setAttribute("class", "row");
 
             var col = document.createElement("div");
-            col.setAttribute("class", "col");
+            col.setAttribute("class", "col-2");
 
             var card_type = ["Block", "Enchantment", "Entity", "Hanging", "Inventory", "Painting", "Player", "Server", "Vehicle", "Weather", "World", "Generator", "Inventory"];
             var card_content = [
