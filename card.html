@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+        <title>Cards</title>
+        <style type="text/css">
+            h1
+            {
+                font-size: 1.35em;
+            }
+        </style>
+    </head>
+    <body>
+        <template id="card_basic">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <h1 class="card-title col-8">title</h1>
+                        <span class="card-type badge badge-secondary col-2">type</span>
+                    </div>
+                    <p class="card-text">content</p>
+                </div>
+            </div>
+        </template>
+
+        <div id="content">
+        </div>
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            var temp = document.getElementById("card_basic").content;
+
+            var content = document.getElementById("content");
+
+            var row = document.createElement("div");
+            row.setAttribute("class", "row");
+
+            var col = document.createElement("div");
+            col.setAttribute("class", "col");
+
+            var card_type = ["Block", "Enchantment", "Entity", "Hanging", "Inventory", "Painting", "Player", "Server", "Vehicle", "Weather", "World", "Generator", "Inventory"];
+            var card_content = [
+                [
+                    ["BlockBreakEvent", "Called when a block is broken by a player."],
+                    ["BlockBurnEvent", "Called when a block is destroyed as a result of being burnt by fire."],
+                    ["BlockCanBuildEvent", "Called when we try to place a block, to see if we can build it here or not."],
+                    ["BlockDamageEvent", "Called when a block is damaged by a player."],
+                    ["BlockDispenseEvent", "Called when an item is dispensed from a block."],
+                    ["BlockEvent", "Represents a block related event."],
+                    ["BlockExpEvent", "An event that's called when a block yields experience."],
+                    ["BlockFadeEvent", "Called when a block fades, melts or disappears based on world conditions"],
+                    ["BlockFormEvent", "Called when a block is formed or spreads based on world conditions."],
+                    ["BlockFromToEvent", "Represents events with a source block and a destination block, currently only applies to liquid (lava and water) and teleporting dragon eggs."],
+                    ["BlockGrowEvent", "Called when a block grows naturally in the world."],
+                    ["BlockIgniteEvent", "Called when a block is ignited."],
+                    ["BlockMultiPlaceEvent", "Fired when a single block placement action of a player triggers the creation of multiple blocks(e.g."],
+                    ["BlockPhysicsEvent", "Thrown when a block physics check is called"],
+                    ["BlockPistonEvent", "Called when a piston block is triggered"],
+                    ["BlockPistonExtendEvent", "Called when a piston extends"],
+                    ["BlockPistonRetractEvent", "Called when a piston retracts"],
+                    ["BlockPlaceEvent", "Called when a block is placed by a player."],
+                    ["BlockRedstoneEvent", "Called when a redstone current changes"],
+                    ["BlockSpreadEvent", "Called when a block spreads based on world conditions."],
+                    ["EntityBlockFormEvent", "Called when a block is formed by entities."],
+                    ["LeavesDecayEvent", "Called when leaves are decaying naturally."],
+                    ["NotePlayEvent", "Called when a note block is being played through player interaction or a redstone current."],
+                    ["SignChangeEvent", "Called when a sign is changed by a player."]
+                ],
+                [
+                    ["EnchantItemEvent", "Called when an ItemStack is successfully enchanted (currently at enchantment table)"],
+                    ["PrepareItemEnchantEvent", "Called when an ItemStack is inserted in an enchantment table - can be called multiple times"]
+                ],
+                [
+                    ["CreatureSpawnEvent", "Called when a creature is spawned into a world."],
+                    ["CreeperPowerEvent", "Called when a Creeper is struck by lightning."],
+                    ["EntityBreakDoorEvent", "Called when an Entity breaks a door"],
+                    ["EntityChangeBlockEvent", "Called when any Entity, excluding players, changes a block."],
+                    ["EntityCombustByBlockEvent", "Called when a block causes an entity to combust."],
+                    ["EntityCombustByEntityEvent", "Called when an entity causes another entity to combust."],
+                    ["EntityCombustEvent", "Called when an entity combusts."],
+                    ["EntityCreatePortalEvent", "Thrown when a Living Entity creates a portal in a world."],
+                    ["EntityDamageByBlockEvent", "Called when an entity is damaged by a block"],
+                    ["EntityDamageByEntityEvent", "Called when an entity is damaged by an entity"],
+                    ["EntityDamageEvent", "Stores data for damage events"],
+                    ["EntityDeathEvent", "Thrown whenever a LivingEntity dies"],
+                    ["EntityEvent", "Represents an Entity-related event"],
+                    ["EntityExplodeEvent", "Called when an entity explodes"],
+                    ["EntityInteractEvent", "Called when an entity interacts with an object"],
+                    ["EntityPortalEnterEvent", "Called when an entity comes into contact with a portal"],
+                    ["EntityPortalEvent", "Called when a non-player entity is about to teleport because it is in contact with a portal."],
+                    ["EntityPortalExitEvent", "Called before an entity exits a portal."],
+                    ["EntityRegainHealthEvent", "Stores data for health-regain events"],
+                    ["EntityShootBowEvent", "Called when a LivingEntity shoots a bow firing an arrow"],
+                    ["EntityTameEvent", "Thrown when a LivingEntity is tamed"],
+                    ["EntityTargetEvent", "Called when a creature targets or untargets another entity"],
+                    ["EntityTargetLivingEntityEvent", "Called when an Entity targets a LivingEntity and can only target LivingEntity's."],
+                    ["EntityTeleportEvent", "Thrown when a non-player entity (such as an Enderman) tries to teleport from one location to another."],
+                    ["EntityUnleashEvent", "Called immediately prior to an entity being unleashed."],
+                    ["ExpBottleEvent", "Called when a ThrownExpBottle hits and releases experience."],
+                    ["ExplosionPrimeEvent", "Called when an entity has made a decision to explode."],
+                    ["FoodLevelChangeEvent", "Called when a human entity's food level changes"],
+                    ["HorseJumpEvent", "Called when a horse jumps."],
+                    ["ItemDespawnEvent", "This event is called when a Item is removed from the world because it has existed for 5 minutes."],
+                    ["ItemSpawnEvent", "Called when an item is spawned into a world"],
+                    ["PigZapEvent", "Stores data for pigs being zapped"],
+                    ["PlayerDeathEvent", "Thrown whenever a Player dies"],
+                    ["PlayerLeashEntityEvent", "Called immediately prior to a creature being leashed by a player."],
+                    ["PotionSplashEvent", "Called when a splash potion hits an area"],
+                    ["ProjectileHitEvent", "Called when a projectile hits an object"],
+                    ["ProjectileLaunchEvent", "Called when a projectile is launched."],
+                    ["SheepDyeWoolEvent", "Called when a sheep's wool is dyed"],
+                    ["SheepRegrowWoolEvent", "Called when a sheep regrows its wool"],
+                    ["SlimeSplitEvent", "Called when a Slime splits into smaller Slimes upon death"]
+                ],
+                [
+                    ["HangingBreakByEntityEvent", "Triggered when a hanging entity is removed by an entity"],
+                    ["HangingBreakEvent", "Triggered when a hanging entity is removed"],
+                    ["HangingEvent", "Represents a hanging entity-related event."],
+                    ["HangingPlaceEvent", "Triggered when a hanging entity is created in the world"]
+                ],
+                [
+                    ["BrewEvent", "Called when the brewing of the contents inside the Brewing Stand is complete."],
+                    ["CraftItemEvent", "Called when the recipe of an Item is completed inside a crafting matrix."],
+                    ["FurnaceBurnEvent", "Called when an ItemStack is successfully burned as fuel in a furnace."],
+                    ["FurnaceExtractEvent", "This event is called when a player takes items out of the furnace"],
+                    ["FurnaceSmeltEvent", "Called when an ItemStack is successfully smelted in a furnace."],
+                    ["InventoryClickEvent", "This event is called when a player clicks a slot in an inventory."],
+                    ["InventoryCloseEvent", "Represents a player related inventory event"],
+                    ["InventoryCreativeEvent", "This event is called when a player in creative mode puts down or picks up an item in their inventory / hotbar and when they drop items from their Inventory while in creative mode."],
+                    ["InventoryDragEvent", "This event is called when the player drags an item in their cursor across the inventory."],
+                    ["InventoryEvent", "Represents a player related inventory event"],
+                    ["InventoryInteractEvent", "An abstract base class for events that describe an interaction between a HumanEntity and the contents of an Inventory."],
+                    ["InventoryMoveItemEvent", "Called when some entity or block (e.g."],
+                    ["InventoryOpenEvent", "Represents a player related inventory event"],
+                    ["InventoryPickupItemEvent", "Called when a hopper or hopper minecart picks up a dropped item."],
+                    ["PrepareItemCraftEvent", ""]
+                ],
+                [
+                    ["PaintingBreakByEntityEvent", "DeprecatedUse HangingBreakByEntityEvent instead."],
+                    ["PaintingBreakEvent", "DeprecatedUse HangingBreakEvent instead."],
+                    ["PaintingEvent", "DeprecatedUse HangingEvent instead."],
+                    ["PaintingPlaceEvent", "DeprecatedUse HangingPlaceEvent instead."]
+                ],
+                [
+                    ["AsyncPlayerChatEvent", "This event will sometimes fire synchronously, depending on how it was triggered."],
+                    ["AsyncPlayerPreLoginEvent", "Stores details for players attempting to log in."],
+                    ["PlayerAchievementAwardedEvent", "Called when a player earns an achievement."],
+                    ["PlayerAnimationEvent", "Represents a player animation event"],
+                    ["PlayerBedEnterEvent", "This event is fired when the player is almost about to enter the bed."],
+                    ["PlayerBedLeaveEvent", "This event is fired when the player is leaving a bed."],
+                    ["PlayerBucketEmptyEvent", "Called when a player empties a bucket"],
+                    ["PlayerBucketEvent", "Called when a player interacts with a Bucket"],
+                    ["PlayerBucketFillEvent", "Called when a player fills a bucket"],
+                    ["PlayerChangedWorldEvent", "Called when a player switches to another world."],
+                    ["PlayerChannelEvent", "This event is called after a player registers or unregisters a new plugin channel."],
+                    ["PlayerChatEvent", "DeprecatedThis event will fire from the main thread and allows the use of all of the Bukkit API, unlike the AsyncPlayerChatEvent."],
+                    ["PlayerChatTabCompleteEvent", "Called when a player attempts to tab-complete a chat message."],
+                    ["PlayerCommandPreprocessEvent", "This event is called whenever a player runs a command (by placing a slash at the start of their message)."],
+                    ["PlayerDropItemEvent", "Thrown when a player drops an item from their inventory"],
+                    ["PlayerEditBookEvent", "Called when a player edits or signs a book and quill item."],
+                    ["PlayerEggThrowEvent", "Called when a player throws an egg and it might hatch"],
+                    ["PlayerEvent", "Represents a player related event"],
+                    ["PlayerExpChangeEvent", "Called when a players experience changes naturally"],
+                    ["PlayerFishEvent", "Thrown when a player is fishing"],
+                    ["PlayerGameModeChangeEvent", "Called when the GameMode of the player is changed."],
+                    ["PlayerInteractEntityEvent", "Represents an event that is called when a player right clicks an entity."],
+                    ["PlayerInteractEvent", "Called when a player interacts with an object or air."],
+                    ["PlayerInventoryEvent", "DeprecatedUse InventoryClickEvent or InventoryOpenEvent instead, or one of the other inventory events in org.bukkit.event.inventory."],
+                    ["PlayerItemBreakEvent", "Fired when a player's item breaks (such as a shovel or flint and steel)."],
+                    ["PlayerItemConsumeEvent", "This event will fire when a player is finishing consuming an item (food, potion, milk bucket)."],
+                    ["PlayerItemHeldEvent", "Fired when a player changes their currently held item"],
+                    ["PlayerJoinEvent", "Called when a player joins a server"],
+                    ["PlayerKickEvent", "Called when a player gets kicked from the server"],
+                    ["PlayerLevelChangeEvent", "Called when a players level changes"],
+                    ["PlayerLoginEvent", "Stores details for players attempting to log in"],
+                    ["PlayerMoveEvent", "Holds information for player movement events"],
+                    ["PlayerPickupItemEvent", "Thrown when a player picks an item up from the ground"],
+                    ["PlayerPortalEvent", "Called when a player is about to teleport because it is in contact with a portal."],
+                    ["PlayerPreLoginEvent", "DeprecatedThis event causes synchronization from the login thread; AsyncPlayerPreLoginEvent is preferred to keep the secondary threads asynchronous."],
+                    ["PlayerQuitEvent", "Called when a player leaves a server"],
+                    ["PlayerRegisterChannelEvent", "This is called immediately after a player registers for a plugin channel."],
+                    ["PlayerRespawnEvent", "Called when a player respawns."],
+                    ["PlayerShearEntityEvent", "Called when a player shears an entity"],
+                    ["PlayerStatisticIncrementEvent", "Called when a player statistic is incremented."],
+                    ["PlayerTeleportEvent", "Holds information for player teleport events"],
+                    ["PlayerToggleFlightEvent", "Called when a player toggles their flying state"],
+                    ["PlayerToggleSneakEvent", "Called when a player toggles their sneaking state"],
+                    ["PlayerToggleSprintEvent", "Called when a player toggles their sprinting state"],
+                    ["PlayerUnleashEntityEvent", "Called prior to an entity being unleashed due to a player's action."],
+                    ["PlayerUnregisterChannelEvent", "This is called immediately after a player unregisters for a plugin channel."],
+                    ["PlayerVelocityEvent", "Called when the velocity of a player changes."]
+                ],
+                [
+                    ["MapInitializeEvent", "Called when a map is initialized."],
+                    ["PluginDisableEvent", "Called when a plugin is disabled."],
+                    ["PluginEnableEvent", "Called when a plugin is enabled."],
+                    ["PluginEvent", "Used for plugin enable and disable events"],
+                    ["RemoteServerCommandEvent", "This event is called when a command is recieved over RCON."],
+                    ["ServerCommandEvent", "This event is called when a command is run from the server console."],
+                    ["ServerEvent", "Miscellaneous server events"],
+                    ["ServerListPingEvent", "Called when a server list ping is coming in."],
+                    ["ServiceEvent", "An event relating to a registered service."],
+                    ["ServiceRegisterEvent", "This event is called when a service is registered."],
+                    ["ServiceUnregisterEvent", "This event is called when a service is unregistered."]
+                ],
+                [
+                    ["VehicleBlockCollisionEvent", "Raised when a vehicle collides with a block."],
+                    ["VehicleCollisionEvent", "Raised when a vehicle collides."],
+                    ["VehicleCreateEvent", "Raised when a vehicle is created."],
+                    ["VehicleDamageEvent", "Raised when a vehicle receives damage."],
+                    ["VehicleDestroyEvent", "Raised when a vehicle is destroyed, which could be caused by either a player or the environment."],
+                    ["VehicleEnterEvent", "Raised when an entity enters a vehicle."],
+                    ["VehicleEntityCollisionEvent", "Raised when a vehicle collides with an entity."],
+                    ["VehicleEvent", "Represents a vehicle-related event."],
+                    ["VehicleExitEvent", "Raised when a living entity exits a vehicle."],
+                    ["VehicleMoveEvent", "Raised when a vehicle moves."],
+                    ["VehicleUpdateEvent", "Called when a vehicle updates"]
+                ],
+                [
+                    ["LightningStrikeEvent", "Stores data for lightning striking"],
+                    ["ThunderChangeEvent", "Stores data for thunder state changing in a world"],
+                    ["WeatherChangeEvent", "Stores data for weather changing in a world"],
+                    ["WeatherEvent", "Represents a Weather-related event"]
+                ],
+                [
+                    ["ChunkEvent", "Represents a Chunk related event"],
+                    ["ChunkLoadEvent", "Called when a chunk is loaded"],
+                    ["ChunkPopulateEvent", "Thrown when a new chunk has finished being populated."],
+                    ["ChunkUnloadEvent", "Called when a chunk is unloaded"],
+                    ["PortalCreateEvent", "Called when a portal is created"],
+                    ["SpawnChangeEvent", "An event that is called when a world's spawn changes."],
+                    ["StructureGrowEvent", "Event that is called when an organic structure attempts to grow (Sapling -> Tree), (Mushroom -> Huge Mushroom), naturally or using bonemeal."],
+                    ["WorldEvent", "Represents events within a world"],
+                    ["WorldInitEvent", "Called when a World is initializing"],
+                    ["WorldLoadEvent", "Called when a World is loaded"],
+                    ["WorldSaveEvent", "Called when a World is saved."],
+                    ["WorldUnloadEvent", "Called when a World is unloaded"]
+                ],
+                [
+                    ["ChunkGenerator.BiomeGrid", "Interface to biome data for chunk to be generated: initialized with default values for world type and seed."],
+                    ["BlockPopulator", "A block populator is responsible for generating a small area of blocks."],
+                    ["ChunkGenerator", "A chunk generator is responsible for the initial shaping of an entire chunk."]
+                ],
+                [
+                    ["AnvilInventory", "Interface to the inventory of an Anvil."],
+                    ["BeaconInventory", "Interface to the inventory of a Beacon."],
+                    ["BrewerInventory", "Interface to the inventory of a Brewing Stand."],
+                    ["CraftingInventory", "Interface to the crafting inventories"],
+                    ["DoubleChestInventory", "Interface to the inventory of a Double Chest."],
+                    ["EnchantingInventory", "Interface to the inventory of an Enchantment Table."],
+                    ["EntityEquipment", "An interface to a creatures inventory"],
+                    ["FurnaceInventory", "Interface to the inventory of a Furnace."],
+                    ["HorseInventory", "An interface to the inventory of a Horse."],
+                    ["Inventory", "Interface to the various inventories."],
+                    ["InventoryHolder", ""],
+                    ["ItemFactory", "An instance of the ItemFactory can be obtained with Server.getItemFactory()."],
+                    ["MerchantInventory", ""],
+                    ["PlayerInventory", "Interface to the inventory of a Player, including the four armor slots."],
+                    ["Recipe", "Represents some type of crafting recipe."]
+                ]
+            ];
+
+            function stringToInt(str) {
+                return Array.from(str).reduce(function(a, b) {
+                    return a.toString().charCodeAt() + b.toString().charCodeAt();
+                });
+            }
+
+            function stringToHash(str) {
+                var hash = 0;
+
+                for (var i = 0; i < str.length; i++) {
+                    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+                    hash = hash & hash;
+                }
+
+                return hash;
+            };
+
+            function intToRGB(i){
+                var c = (i & 0x00FFFFFF)
+                    .toString(16)
+                    .toUpperCase();
+
+                return "00000".substring(0, 6 - c.length) + c;
+            }
+
+            var row_id = 0;
+
+            for (var x = 0; x < card_content.length; x++)
+            {
+                for (var i = 0; i < card_content[x].length; i++)
+                {
+                    var this_card_content = card_content[x][i];
+
+                    var this_card_dom = document.importNode(temp, true);
+                    this_card_dom.querySelector("h1.card-title").innerText = (this_card_content[0].split(/(?=[A-Z])/)).join(" ");
+                    this_card_dom.querySelector("span.card-type").innerText = card_type[x];
+                    this_card_dom.querySelector("p.card-text").innerText = this_card_content[1];
+
+                    this_card_dom.querySelector("span.card-type").setAttribute("style", "background: #" + intToRGB(stringToHash(card_type[x])));
+
+                    var card_col = document.importNode(col, true);
+                    card_col.appendChild(this_card_dom);
+
+                    if (i % 6 == 0)
+                    {
+                        row_id++;
+
+                        var card_row = document.importNode(row, true);
+                        card_row.setAttribute("id", "row_" + row_id.toString());
+                        card_row.appendChild(card_col);
+
+                        content.appendChild(document.importNode(card_row, true));
+                    }
+                    else
+                    {
+                        var card_row = document.getElementById("row_" + row_id.toString());
+                        card_row.appendChild(card_col);
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
